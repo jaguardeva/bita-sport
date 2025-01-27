@@ -31,4 +31,9 @@ class Field extends Model
     {
         return $this->hasMany(Review::class, 'field_uuid', 'uuid');
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_uuid', 'uuid');
+    }
 }

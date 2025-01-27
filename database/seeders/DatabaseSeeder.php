@@ -35,5 +35,14 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password'),
             ]
         );
+
+        $this->call(
+            [
+                PermissionSeeder::class,
+                ReviewSeeder::class,
+                CategorySeeder::class,
+                FieldSeeder::class,
+            ]
+        );
     }
 }

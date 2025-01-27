@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Field;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,10 +15,14 @@ class FieldController extends Controller
     public function index()
     {
         $venue = Field::withAvg('reviews', 'rating')
+            ->with('category')
             ->get();
 
-        return Inertia::render('Field', [
-            'venues' => $venue
+        $categories = Category::all();
+
+        return Inertia::render('Field/Index', [
+            'venues' => $venue,
+            'categories' => $categories
         ]);
     }
 
@@ -40,9 +45,17 @@ class FieldController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $uuid)
     {
-        //
+        $field = Field::where('uuid', $uuid)
+            ->with('category')
+            ->with('reviews')
+            ->withAvg('reviews', 'rating')
+            ->first();
+
+        return Inertia::render('Field/Show', [
+            'field' => $field
+        ]);
     }
 
     /**
