@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Field;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -50,11 +51,20 @@ class FieldController extends Controller
         $field = Field::where('uuid', $uuid)
             ->with('category')
             ->with('reviews')
+            ->with('facilities')
+            ->with('schedules')
             ->withAvg('reviews', 'rating')
             ->first();
 
+        $reviews = Review::where('field_uuid', $field->uuid)
+            ->with(['user' => function ($query) {
+                $query->select('uuid', 'name');
+            }])
+            ->get();
+
         return Inertia::render('Field/Show', [
-            'field' => $field
+            'field' => $field,
+            'reviews' => $reviews
         ]);
     }
 

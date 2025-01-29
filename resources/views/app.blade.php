@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
 
-    <link rel="stylesheet" href="{{asset('fontawesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('fontawasome/css/all.css')}}">
 
     <!-- Scripts -->
     @routes
@@ -18,7 +18,7 @@
     @inertiaHead
 </head>
 
-<body>
+<body class="relative">
     @inertia
 </body>
 

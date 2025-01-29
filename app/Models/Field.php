@@ -36,4 +36,14 @@ class Field extends Model
     {
         return $this->belongsTo(Category::class, 'category_uuid', 'uuid');
     }
+
+    public function facilities()
+    {
+        return $this->belongsToMany(Facility::class, 'field_facility');
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'field_uuid', 'uuid');
+    }
 }

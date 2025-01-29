@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
                 ReviewSeeder::class,
                 CategorySeeder::class,
                 FieldSeeder::class,
+                FacilitySeeder::class,
             ]
         );
     }
